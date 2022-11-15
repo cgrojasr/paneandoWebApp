@@ -13,7 +13,20 @@ export class ProductoService {
     private http: HttpClient
   ) { }
 
-  listarPorFiltros(nombre: string):Observable<Producto[]>{
-    return this.http.get<Producto[]>(`${environment.url}produto?nombre=${nombre}}&idTipoProducto=1`);
+  listarPorFiltros(nombre: string, descripcion: string, idTipoProducto: number): Observable<Producto[]>{
+    if(nombre!= null && descripcion == null){
+      return this.http.get<Producto[]>(`${environment.url}producto/filtro?nombre=${nombre}`)
+    }
+
+    if(nombre== null && descripcion!=null){
+      return this.http.get<Producto[]>(`${environment.url}producto/filtro?descripcion=${descripcion}`)
+    }
+
+    if(nombre=="" && descripcion=="" && idTipoProducto !=0)
+    {
+      return this.http.get<Producto[]>(`${environment.url}producto/filtro?idTipoProducto=${idTipoProducto}`)
+    }
+
+    return this.http.get<Producto[]>(`${environment.url}producto`)
   }
 }

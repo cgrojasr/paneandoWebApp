@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './main/main.component';
-import { DemoComponent } from './demo/demo.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 const routes: Routes = [
   {
@@ -10,16 +9,20 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'main',
+        redirectTo: 'carrito',
         pathMatch: 'full'
       },
       {
-        path: 'main',
-        component: MainComponent
+        path: 'carrito',
+        component: CarritoComponent
       },
       {
-        path: 'demo',
-        component: DemoComponent
+        path: 'carrito/:idProducto/:cantidad',
+        component: CarritoComponent
+      },
+      {
+        path: 'pedido',
+        component: CarritoComponent
       }
     ]
   }
@@ -35,4 +38,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class HomeRoutingModule { }
+export class ComercialRoutingModule { }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Producto } from 'src/app/models/Producto';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 
 @Component({
   selector: 'app-main',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  lstProductos: Producto[] = [];
 
-  constructor() { }
+  constructor(
+    private productoService: ProductoService
+  ) { }
 
   ngOnInit(): void {
+    this.listarProductosPorFiltros();
   }
 
+  listarProductosPorFiltros(){
+    this.productoService.listarPorFiltros('', '', 1).subscribe(
+      response=>{
+        this.lstProductos = response
+      }
+    );
+  }
 }

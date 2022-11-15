@@ -1,1 +1,6 @@
-<p>main works!</p>
+<div class="row">
+    <div *ngFor="let producto of lstProductos" class="col-4">
+        <app-main-producto [objProducto]=producto>
+        </app-main-producto>
+    </div>
+</div>

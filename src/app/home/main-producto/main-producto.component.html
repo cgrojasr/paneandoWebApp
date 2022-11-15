@@ -1,0 +1,29 @@
+<br>
+<div class="row">
+    <img src="../../../{{objProducto.imageURL}}" width="10" height="200">
+</div>
+<div class="row">
+    <div class="col-12">
+        {{objProducto.nombre}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        {{objProducto.descripcion}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="btn-group d-grid gap-2" role="group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Agregar al Carrito
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end">
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/5">5</a></li>
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/10">10</a></li>
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/15">15</a></li>
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/20">20</a></li>
+            </ul>
+          </div>
+    </div>
+</div>

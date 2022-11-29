@@ -29,4 +29,8 @@ export class ProductoService {
 
     return this.http.get<Producto[]>(`${environment.url}producto`)
   }
+
+  listarPorIdProductos(strIdProductos: string){
+    return this.http.get<Producto[]>(`${environment.url}producto/buscarIds?strIdProductos=${strIdProductos}`)
+  }
 }

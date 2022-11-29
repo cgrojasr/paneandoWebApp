@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Producto } from 'src/app/models/Producto';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductoCarrito } from 'src/app/models/ProductoCarrito';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 
 @Component({
   selector: 'app-carrito',
@@ -11,11 +12,14 @@ export class CarritoComponent implements OnInit {
   items: { idProducto: number, cantidad: number}[] = [];
   item = {idProducto: 0, cantidad: 0};
 
-  idProducto: number = 0;
-  cantidad: number = 0;
+  productos: ProductoCarrito[] = [];
+  totalVenta: number = 0;
+
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private productoService: ProductoService
   ) { 
     if(localStorage.getItem('cart')==null){
       localStorage.setItem('cart', JSON.stringify(this.items));
@@ -30,9 +34,45 @@ export class CarritoComponent implements OnInit {
       this.item.cantidad = params['cantidad'];
     });
 
-    if(this.item.idProducto != 0){
-      this.items.push(this.item);
+    if(this.item.idProducto !== undefined){
+      if(this.items.find(x=>x.idProducto==this.item.idProducto)!==undefined){
+        this.items.find(x=>x.idProducto==this.item.idProducto)!.cantidad = this.item.cantidad;
+      }
+      else {
+        this.items.push(this.item);
+      }
       localStorage.setItem('cart', JSON.stringify(this.items));
     }
+    console.log(localStorage.getItem('cart'))
+
+    if(this.items.length > 0){
+      this.listarProductos();
+    }
+  }
+
+  listarProductos(): void{
+    var strIdProductos = '';
+    this.items.forEach(item => {
+      strIdProductos = strIdProductos + item.idProducto + ",";
+    })
+    if(strIdProductos != ''){
+      this.productoService.listarPorIdProductos(strIdProductos).subscribe(
+        result => {
+          for(let producto of result){
+            var productoCarrito: ProductoCarrito = {
+              objProducto: producto,
+              cantidad: this.items.find(x=> x.idProducto==producto.idProducto)!.cantidad
+            };
+            this.productos.push(productoCarrito);
+            this.totalVenta = this.totalVenta + productoCarrito.objProducto.lstProductoPrecio[0].valorVenta * productoCarrito.cantidad;
+          }
+        } 
+      )
+    }
+  }
+
+  btn_limpiar_OnClick(): void {
+    localStorage.removeItem('cart');
+    this.router.navigate(['/comercial/carrito'])
   }
 }

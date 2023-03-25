@@ -1,3 +1,4 @@
+import { ProductoPrecio } from "./ProductoPrecio";
 import { TipoProducto } from "./TipoProducto";
 
 
@@ -8,4 +9,5 @@ export interface Producto {
     imageURL: string;
     objTipoProducto: TipoProducto;
     activo: boolean;
+    lstProductoPrecio: ProductoPrecio[]
 }

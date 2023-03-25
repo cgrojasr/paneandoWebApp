@@ -5,6 +5,7 @@ import { CarritoProductoComponent } from './carrito-producto/carrito-producto.co
 import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoConfirmarComponent } from './pedido-confirmar/pedido-confirmar.component';
 import { ComercialRoutingModule } from './comercial-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { ComercialRoutingModule } from './comercial-routing.module';
   ],
   imports: [
     CommonModule,
-    ComercialRoutingModule
+    ComercialRoutingModule,
+    FormsModule
   ]
 })
 export class ComercialModule { }

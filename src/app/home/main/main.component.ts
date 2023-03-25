@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
     this.listarProductosPorFiltros();
   }
 
-  listarProductosPorFiltros(){
+  listarProductosPorFiltros(): void{
     this.productoService.listarPorFiltros('', '', 1).subscribe(
       response=>{
         this.lstProductos = response

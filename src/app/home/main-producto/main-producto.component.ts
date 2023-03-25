@@ -17,6 +17,7 @@ export class MainProductoComponent implements OnInit {
       nombre: '',
       activo: false
     },
+    lstProductoPrecio: [],
     activo: false
   }
 

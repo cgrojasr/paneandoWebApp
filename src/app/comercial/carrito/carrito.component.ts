@@ -43,7 +43,6 @@ export class CarritoComponent implements OnInit {
       }
       localStorage.setItem('cart', JSON.stringify(this.items));
     }
-    console.log(localStorage.getItem('cart'))
 
     if(this.items.length > 0){
       this.listarProductos();
@@ -71,8 +70,12 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  btn_limpiar_OnClick(): void {
+  btnLimpiar_OnClick(): void {
     localStorage.removeItem('cart');
     this.router.navigate(['/comercial/carrito'])
+  }
+
+  btnPedidoRegistrar_OnClick():void{
+    this.router.navigate(['comercial/pedido'])
   }
 }

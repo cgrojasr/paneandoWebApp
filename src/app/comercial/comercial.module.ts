@@ -6,6 +6,8 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoConfirmarComponent } from './pedido-confirmar/pedido-confirmar.component';
 import { ComercialRoutingModule } from './comercial-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ComercialComponent } from './comercial.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -14,12 +16,14 @@ import { FormsModule } from '@angular/forms';
     CarritoComponent,
     CarritoProductoComponent,
     PedidoComponent,
-    PedidoConfirmarComponent
+    PedidoConfirmarComponent,
+    ComercialComponent
   ],
   imports: [
     CommonModule,
     ComercialRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class ComercialModule { }

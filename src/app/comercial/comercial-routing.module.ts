@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PedidoComponent } from './pedido/pedido.component';
+import { ComercialComponent } from './comercial.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: ComercialComponent,
     children: [
       {
         path: '',

@@ -5,6 +5,8 @@ import { SecurityRoutingModule } from './security-routing.module';
 import { SecurityComponent } from './security.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { RecuperarComponent } from './recuperar/recuperar.component';
 
 
 
@@ -13,10 +15,12 @@ import { FooterComponent } from './footer/footer.component';
     LoginComponent,
     SecurityComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RecuperarComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     SecurityRoutingModule
   ]
 })

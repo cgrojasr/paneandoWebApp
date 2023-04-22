@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Producto } from 'src/app/models/Producto';
+import { Producto, ProductoCatalogo } from 'src/app/models/Producto';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -32,5 +32,9 @@ export class ProductoService {
 
   listarPorIdProductos(strIdProductos: string){
     return this.http.get<Producto[]>(`${environment.url}producto/buscarIds?strIdProductos=${strIdProductos}`)
+  }
+
+  catalogoDisponible(): Observable<ProductoCatalogo[]>{
+    return this.http.get<ProductoCatalogo[]>(`${environment.url}producto`)
   }
 }

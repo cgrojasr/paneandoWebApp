@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsuarioAutenticar } from 'src/app/models/UsuarioAutenticar';
+import { first } from 'rxjs';
+import { ClienteAutenticar, ClienteLogin} from 'src/app/models/Cliente';
+import { ClienteService } from 'src/app/services/cliente/cliente.service';
 
 @Component({
   selector: 'app-login',
@@ -8,26 +10,37 @@ import { UsuarioAutenticar } from 'src/app/models/UsuarioAutenticar';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  objUsuarioAutenticar: UsuarioAutenticar = {
-    usuario: '',
+  objClienteAutenticar: ClienteAutenticar = {
+    email: '',
     password: ''
   };
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private clienteService: ClienteService
   ) { }
 
   ngOnInit(): void {
   }
 
   btnIngresar_OnClick(): void {
-    if(this.objUsuarioAutenticar.usuario == "" && this.objUsuarioAutenticar.password == ""){
-      this.router.navigateByUrl("home");
-    }
+    this.clienteService.Autenticar(this.objClienteAutenticar).subscribe(
+      result => {
+        if(result.email == this.objClienteAutenticar.email){
+          this.router.navigateByUrl("home");
+        }
+        else{
+          this.router.navigateByUrl("security/recuperar");
+        }
+      },
+      error => {
+        console.log(error.status)
+        this.router.navigateByUrl("security/recuperar");
+      }
+    );
   }
 
   btnRecuperar_OnClick(): void{
     this.router.navigateByUrl("security/recuperar");
   }
-
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from 'src/app/models/Producto';
+import { Producto, ProductoCatalogo } from 'src/app/models/Producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  lstProductos: Producto[] = [];
+  lstProductos: ProductoCatalogo[] = [];
 
   constructor(
     private productoService: ProductoService
@@ -19,7 +19,13 @@ export class MainComponent implements OnInit {
   }
 
   listarProductosPorFiltros(): void{
-    this.productoService.listarPorFiltros('', '', 1).subscribe(
+    // this.productoService.listarPorFiltros('', '', 1).subscribe(
+    //   response=>{
+    //     this.lstProductos = response
+    //   }
+    // );
+
+    this.productoService.catalogoDisponible().subscribe(
       response=>{
         this.lstProductos = response
       }

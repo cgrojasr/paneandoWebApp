@@ -1,6 +1,6 @@
 <br>
 <div class="row">
-    <img src="../../../{{objProducto.imageURL}}" width="10" height="200">
+    <img src="../../../{{objProducto.image_url}}" width="10" height="200">
 </div>
 <div class="row">
     <div class="col-12">
@@ -14,7 +14,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        {{objProducto.lstProductoPrecio[0].valorVenta}} soles
+        {{objProducto.valor_venta}} soles
     </div>
 </div>
 <div class="row">
@@ -24,10 +24,10 @@
               Agregar al Carrito
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/5">5</a></li>
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/10">10</a></li>
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/15">15</a></li>
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.idProducto}}/20">20</a></li>
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/5">5</a></li>
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/10">10</a></li>
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/15">15</a></li>
+              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/20">20</a></li>
             </ul>
           </div>
     </div>

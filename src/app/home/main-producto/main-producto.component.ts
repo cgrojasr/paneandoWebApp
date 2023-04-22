@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Producto } from 'src/app/models/Producto';
+import { Producto, ProductoCatalogo } from 'src/app/models/Producto';
 
 @Component({
   selector: 'app-main-producto',
@@ -7,18 +7,13 @@ import { Producto } from 'src/app/models/Producto';
   styleUrls: ['./main-producto.component.css']
 })
 export class MainProductoComponent implements OnInit {
-  @Input() objProducto: Producto = {
-    idProducto: 0,
+  @Input() objProducto: ProductoCatalogo = {
+    id_producto: 0,
     nombre: '',
     descripcion: '',
-    imageURL: '',
-    objTipoProducto: {
-      idTipoPedido: 0,
-      nombre: '',
-      activo: false
-    },
-    lstProductoPrecio: [],
-    activo: false
+    image_url: '',
+    tipo_producto: '',
+    valor_venta: 0
   }
 
   constructor(

@@ -11,3 +11,12 @@ export interface Producto {
     activo: boolean;
     lstProductoPrecio: ProductoPrecio[]
 }
+
+export interface ProductoCatalogo{
+    id_producto: number,
+    nombre: String,
+    descripcion: String,
+    tipo_producto: String,
+    valor_venta: Number,
+    image_url: String
+}

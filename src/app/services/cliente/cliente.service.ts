@@ -15,4 +15,8 @@ export class ClienteService {
   Autenticar(cliente: ClienteAutenticar){
     return this.http.post<ClienteLogin>(`${environment.url}cliente`, cliente);
   }
+
+  RegistrarCliente(){}
+
+  ActualizarCliente(){}
 }

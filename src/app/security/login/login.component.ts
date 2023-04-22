@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     this.clienteService.Autenticar(this.objClienteAutenticar).subscribe(
       result => {
         if(result.email == this.objClienteAutenticar.email){
+          console.log(result);
           this.router.navigateByUrl("home");
         }
         else{

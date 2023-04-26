@@ -1,6 +1,17 @@
-<div class="row">
-    <div *ngFor="let producto of lstProductos" class="col-4">
-        <app-main-producto [objProducto]=producto>
-        </app-main-producto>
+<form #form="ngForm" >
+    <br>
+    <div class="row">
+        <div class="col-10">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Nombre o descripción del producto" aria-label="Producto" aria-describedby="button-addon2" name="texto" [(ngModel)]="texto">
+                <button class="btn btn-primary" type="button" id="btnBuscar" (click)="btnBuscar_OnClick()">Buscar</button>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div *ngFor="let producto of lstProductos" class="col-3">
+            <app-main-producto [objProducto]=producto>
+            </app-main-producto>
+        </div>
+    </div>
+</form>

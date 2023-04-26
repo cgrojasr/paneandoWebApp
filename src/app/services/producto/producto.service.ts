@@ -34,7 +34,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(`${environment.url}producto/buscarIds?strIdProductos=${strIdProductos}`)
   }
 
-  catalogoDisponible(): Observable<ProductoCatalogo[]>{
-    return this.http.get<ProductoCatalogo[]>(`${environment.url}producto`)
+  catalogoDisponible(texto: String): Observable<ProductoCatalogo[]>{
+    return this.http.get<ProductoCatalogo[]>(`${environment.url}producto/${texto}`)
   }
 }

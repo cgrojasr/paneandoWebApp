@@ -9,6 +9,7 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
 })
 export class MainComponent implements OnInit {
   lstProductos: ProductoCatalogo[] = [];
+  texto: String = ""
 
   constructor(
     private productoService: ProductoService
@@ -19,16 +20,14 @@ export class MainComponent implements OnInit {
   }
 
   listarProductosPorFiltros(): void{
-    // this.productoService.listarPorFiltros('', '', 1).subscribe(
-    //   response=>{
-    //     this.lstProductos = response
-    //   }
-    // );
-
-    this.productoService.catalogoDisponible().subscribe(
+    this.productoService.catalogoDisponible(this.texto).subscribe(
       response=>{
         this.lstProductos = response
       }
     );
+  }
+
+  btnBuscar_OnClick(){
+    this.listarProductosPorFiltros();
   }
 }

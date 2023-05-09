@@ -3,14 +3,23 @@
     <div class="row">
         <div class="col-10">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombre o descripción del producto" aria-label="Producto" aria-describedby="button-addon2" name="texto" [(ngModel)]="texto">
+                <input type="text" class="form-control" placeholder="Nombre o descripción del producto" aria-label="Producto" aria-describedby="button-addon2" name="texto" [(ngModel)]="txtBusqueda">
                 <button class="btn btn-primary" type="button" id="btnBuscar" (click)="btnBuscar_OnClick()">Buscar</button>
             </div>
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-primary position-relative">
+                Carrito
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{cantidad}}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </button>
         </div>
     </div>
     <div class="row">
         <div *ngFor="let producto of lstProductos" class="col-3">
-            <app-main-producto [objProducto]=producto>
+            <app-main-producto [objProducto]=producto (eventAgregarCarrito)="btnAgregarCarrito_OnClick($event)" (eventEliminarCarrito)="btnEliminarCarrito_OnClick($event)" (eventModificarCarrito)="selCantidad_OnSelected($event)">
             </app-main-producto>
         </div>
     </div>

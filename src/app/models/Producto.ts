@@ -18,5 +18,12 @@ export interface ProductoCatalogo{
     descripcion: String,
     tipo_producto: String,
     valor_venta: Number,
-    image_url: String
+    image_url: String,
+    cantidad?: number,
+    selected: boolean
+}
+
+export interface ProductoLocalStorage {
+    id_producto: number,
+    cantidad: number
 }

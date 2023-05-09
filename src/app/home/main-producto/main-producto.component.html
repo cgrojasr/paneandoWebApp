@@ -1,34 +1,39 @@
 <br>
-<div class="row">
-    <img src="../../../{{objProducto.image_url}}" width="10" height="200">
-</div>
-<div class="row">
-    <div class="col-12">
-        {{objProducto.nombre}}
+    <div class="row">
+        <img src="../../../{{objProducto.image_url}}" width="10" height="200">
     </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        {{objProducto.descripcion}}
+    <div class="row">
+        <div class="col-12">
+            {{objProducto.nombre}}
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        {{objProducto.valor_venta}} soles
+    <div class="row">
+        <div class="col-12">
+            {{objProducto.descripcion}}
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div class="btn-group d-grid gap-2" role="group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              Agregar al Carrito
-            </button>
-            <ul class="dropdown-menu dropdown-menu-lg-end">
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/5">5</a></li>
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/10">10</a></li>
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/15">15</a></li>
-              <li><a class="dropdown-item" href="comercial/carrito/{{objProducto.id_producto}}/20">20</a></li>
-            </ul>
-          </div>
+    <div class="row">
+        <div class="col-12">
+            {{objProducto.valor_venta}} soles
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-6">
+            <button class="btn btn-primary" (click)="btnAgregarCarrito_OnClick(5)" [hidden]="objProducto.selected">Agregar al Carrito</button>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" [hidden]="!objProducto.selected" (change)="btnCantidad_OnSelected()" [(ngModel)]="cantidad">
+                    <option [ngValue]="5">5 unid</option>
+                    <option [ngValue]="10">10 unid</option>
+                    <option [ngValue]="15">15 unid</option>
+                    <option [ngValue]="20">20 unid</option>
+                </select>
+            </div>
+            <div class="col-1">
+                <button type="button" class="btn btn-danger" [hidden]="!objProducto.selected" (click)="btnEliminarCarrito_OnClick(objProducto.id_producto)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>

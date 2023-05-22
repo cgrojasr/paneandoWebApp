@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col-2">
-            <button type="button" class="btn btn-primary position-relative">
+            <button type="button" class="btn btn-primary position-relative" routerLink="../../comercial">
                 Carrito
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   {{cantidad}}
@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="row">
-        <div *ngFor="let producto of lstProductos" class="col-3">
+        <div *ngFor="let producto of itemsCatalogo" class="col-3">
             <app-main-producto [objProducto]=producto (eventAgregarCarrito)="btnAgregarCarrito_OnClick($event)" (eventEliminarCarrito)="btnEliminarCarrito_OnClick($event)" (eventModificarCarrito)="selCantidad_OnSelected($event)">
             </app-main-producto>
         </div>

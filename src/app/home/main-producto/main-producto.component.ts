@@ -18,10 +18,11 @@ export class MainProductoComponent implements OnInit {
     tipo_producto: '',
     valor_venta: 0,
     cantidad: 0,
+    valor_total: 0,
     selected: false
   }
   hiddenSelected: boolean = true;
-  cantidad?: number = 0;
+  cantidad: number = 0;
 
   @Output() eventAgregarCarrito: EventEmitter<ProductoCatalogo> = new EventEmitter();
   @Output() eventModificarCarrito: EventEmitter<ProductoCatalogo> = new EventEmitter();
@@ -36,11 +37,13 @@ export class MainProductoComponent implements OnInit {
 
   btnCantidad_OnSelected(): void {
     this.objProducto.cantidad = this.cantidad;
+    this.objProducto.valor_total = this.objProducto.valor_venta * this.objProducto.cantidad;
     this.eventModificarCarrito.emit(this.objProducto);
   }
 
   btnAgregarCarrito_OnClick(cantidad: number): void{
     this.objProducto.cantidad = cantidad;
+    this.objProducto.valor_total = this.objProducto.valor_venta * cantidad;
     this.cantidad = cantidad;
     this.eventAgregarCarrito.emit(this.objProducto);
     this.objProducto.selected = true;

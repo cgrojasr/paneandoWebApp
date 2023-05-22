@@ -14,12 +14,13 @@ export interface Producto {
 
 export interface ProductoCatalogo{
     id_producto: number,
-    nombre: String,
-    descripcion: String,
-    tipo_producto: String,
-    valor_venta: Number,
-    image_url: String,
-    cantidad?: number,
+    nombre: string,
+    descripcion: string,
+    tipo_producto: string,
+    valor_venta: number,
+    image_url: string,
+    cantidad: number,
+    valor_total: number,
     selected: boolean
 }
 

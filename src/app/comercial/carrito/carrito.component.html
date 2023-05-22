@@ -1,11 +1,11 @@
 <form #form="ngForm">
     <div class="row">
         <div class="col-12">
-            Carrito de compras
+            <h1>Carrito de compras</h1>
         </div>
     </div>
-    <div class="row" *ngFor="let producto of productos">
-        <app-carrito-producto [objProductoCarrito]="producto"></app-carrito-producto>
+    <div class="row" *ngFor="let producto of itemsCarrito">
+        <app-carrito-producto [objProducto]="producto" (eventEliminarCarrito)="eliminarProductoCarrito($event)"></app-carrito-producto>
     </div>
     <div class="row">
         <div class="col-8">
@@ -13,7 +13,7 @@
                 <div class="col-8">
                 </div>
                 <div class="col-4">
-                    Total: {{totalVenta}}
+                    Total: {{total_venta | number : '.2-2'}}
                 </div>
             </div>
         </div>

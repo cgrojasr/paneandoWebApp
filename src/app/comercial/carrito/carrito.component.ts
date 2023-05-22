@@ -1,5 +1,6 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductoCatalogo } from 'src/app/models/Producto';
 import { ProductoCarrito } from 'src/app/models/ProductoCarrito';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 
@@ -9,11 +10,8 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
-  items: { idProducto: number, cantidad: number}[] = [];
-  item = {idProducto: 0, cantidad: 0};
-
-  productos: ProductoCarrito[] = [];
-  totalVenta: number = 0;
+  itemsCarrito: ProductoCatalogo[] = [];
+  total_venta: number = 0;
 
 
   constructor(
@@ -22,57 +20,49 @@ export class CarritoComponent implements OnInit {
     private productoService: ProductoService
   ) { 
     if(localStorage.getItem('cart')==null){
-      localStorage.setItem('cart', JSON.stringify(this.items));
+      localStorage.setItem('cart', JSON.stringify(this.itemsCarrito));
     } else {
-      this.items = JSON.parse(localStorage.getItem('cart') || ''); 
+      this.itemsCarrito = JSON.parse(localStorage.getItem('cart') || ''); 
     }
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.item.idProducto = params['idProducto'];
-      this.item.cantidad = params['cantidad'];
-    });
-
-    if(this.item.idProducto !== undefined){
-      if(this.items.find(x=>x.idProducto==this.item.idProducto)!==undefined){
-        this.items.find(x=>x.idProducto==this.item.idProducto)!.cantidad = this.item.cantidad;
-      }
-      else {
-        this.items.push(this.item);
-      }
-      localStorage.setItem('cart', JSON.stringify(this.items));
-    }
-
-    if(this.items.length > 0){
-      this.listarProductos();
+    if(this.itemsCarrito.length > 0){
+      this.actualizarProductosCarrito();
     }
   }
 
-  listarProductos(): void{
+  actualizarProductosCarrito(): void{
     var strIdProductos = '';
-    this.items.forEach(item => {
-      strIdProductos = strIdProductos + item.idProducto + ",";
+    this.itemsCarrito.forEach(item => {
+      strIdProductos = strIdProductos + item.id_producto + ",";
     })
     if(strIdProductos != ''){
-      this.productoService.listarPorIdProductos(strIdProductos).subscribe(
+      this.productoService.listarPorIdProductos(strIdProductos.substring(0, strIdProductos.length - 1)).subscribe(
         result => {
           for(let producto of result){
-            var productoCarrito: ProductoCarrito = {
-              objProducto: producto,
-              cantidad: this.items.find(x=> x.idProducto==producto.idProducto)!.cantidad
-            };
-            this.productos.push(productoCarrito);
-            this.totalVenta = this.totalVenta + productoCarrito.objProducto.lstProductoPrecio[0].valorVenta * productoCarrito.cantidad;
-          }
-        } 
+            producto.cantidad = this.itemsCarrito.find(x=> x.id_producto==producto.id_producto)!.cantidad;
+            producto.valor_total = producto.valor_venta * producto.cantidad;
+            this.total_venta = this.total_venta + producto.valor_total
+          };
+          localStorage.removeItem('cart');
+          localStorage.setItem('cart', JSON.stringify(result));
+        }
       )
     }
   }
 
   btnLimpiar_OnClick(): void {
     localStorage.removeItem('cart');
-    this.router.navigate(['/comercial/carrito'])
+    this.itemsCarrito = [];
+    this.total_venta = 0;
+  }
+
+  eliminarProductoCarrito(id_producto:number): void{
+    if(localStorage.getItem('cart')!=null){
+      this.itemsCarrito = JSON.parse(localStorage.getItem('cart') || ''); 
+      this.total_venta = this.itemsCarrito.reduce((total, item) => total + item.valor_total, 0);
+    }
   }
 
   btnPedidoRegistrar_OnClick():void{

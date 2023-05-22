@@ -3,26 +3,26 @@
         <div class="col-8">
             <div class="row">
                 <div class="col-12">
-                    {{objProductoCarrito.objProducto.nombre}}
+                    {{objProducto.nombre}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-4">
-                    Cantidad: {{objProductoCarrito.cantidad}}
+                    Cantidad: {{objProducto.cantidad}}
                 </div>
                 <div class="col-4">
-                    Precio Unitario: {{objProductoCarrito.objProducto.lstProductoPrecio[0].valorVenta}}
+                    Precio Unitario: S/ {{objProducto.valor_venta | number : '.2-2'}}
                 </div>
                 <div class="col-4">
-                    Valor Venta: {{objProductoCarrito.cantidad*objProductoCarrito.objProducto.lstProductoPrecio[0].valorVenta}} Soles
+                    Valor Venta: S/ {{objProducto.valor_total | number : '.2-2'}}
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <img src="../../../{{objProductoCarrito.objProducto.imageURL}}" width="150px">
+            <img src="../../../{{objProducto.image_url}}" width="150px">
         </div>
         <div class="col-1">
-            <button type="button" class="btn btn-primary" (click)="btnEliminar_OnClick(objProductoCarrito.objProducto.idProducto)">Eliminar</button>
+            <button type="button" class="btn btn-primary" (click)="btnEliminar_OnClick(objProducto.id_producto)">Eliminar</button>
         </div>
     </div>
 </form>

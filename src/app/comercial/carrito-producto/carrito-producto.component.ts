@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductoCatalogo } from 'src/app/models/Producto';
 import { ProductoCarrito } from 'src/app/models/ProductoCarrito';
 
 @Component({
@@ -9,22 +10,19 @@ import { ProductoCarrito } from 'src/app/models/ProductoCarrito';
 })
 export class CarritoProductoComponent implements OnInit {
 
-  @Input() objProductoCarrito: ProductoCarrito = {
-    objProducto: {
-      idProducto: 0,
-      nombre: '',
-      descripcion: '',
-      lstProductoPrecio: [],
-      objTipoProducto: {
-        idTipoPedido: 0,
-        nombre: '',
-        activo: false
-      },
-      activo: false,
-      imageURL: '',
-    },
-    cantidad: 0
+  @Input() objProducto: ProductoCatalogo = {
+    id_producto: 0,
+    nombre: '',
+    descripcion: '',
+    image_url: '',
+    tipo_producto: '',
+    valor_venta: 0,
+    cantidad: 0,
+    valor_total: 0,
+    selected: false
   }
+
+  @Output() eventEliminarCarrito: EventEmitter<number> = new EventEmitter();
 
   constructor(
     private router: Router,
@@ -34,20 +32,17 @@ export class CarritoProductoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  btnEliminar_OnClick(idProducto: number): void{
-    var items: { idProducto: number, cantidad: number}[] = [];
+  btnEliminar_OnClick(id_producto: number): void{
+    var items: ProductoCatalogo[] = [];
     items = JSON.parse(localStorage.getItem('cart') || '');
-    items.splice(items.findIndex(x=>x.idProducto==idProducto),1);
+    items.splice(items.findIndex(x=>x.id_producto==id_producto),1);
     localStorage.setItem('cart', JSON.stringify(items));
-    this.refresh_page();
+    this.eventEliminarCarrito.emit(id_producto);
   }
 
   refresh_page():void{
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    // this.router.navigate(['../../'], {
-    //   relativeTo: this.route,
-    // })
     this.router.navigate(['/comercial/carrito'])
   }
 }

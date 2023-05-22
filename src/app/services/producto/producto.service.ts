@@ -30,8 +30,8 @@ export class ProductoService {
     return this.http.get<Producto[]>(`${environment.url}producto`)
   }
 
-  listarPorIdProductos(strIdProductos: string){
-    return this.http.get<Producto[]>(`${environment.url}producto/ListarPorIds?strIdProductos=${strIdProductos}`)
+  listarPorIdProductos(strIdProductos: string):Observable<ProductoCatalogo[]>{
+    return this.http.get<ProductoCatalogo[]>(`${environment.url}producto/ListarPorIds?strIdProductos=${strIdProductos}`)
   }
 
   catalogoDisponible(texto: String): Observable<ProductoCatalogo[]>{

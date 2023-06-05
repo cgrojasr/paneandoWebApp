@@ -2,9 +2,14 @@
     <br>
     <div class="row">
         <div class="col-10">
+            <h2>Bienvenido {{objCliente.nombres}} {{objCliente.apellidos}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombre o descripción del producto" aria-label="Producto" aria-describedby="button-addon2" name="texto" [(ngModel)]="txtBusqueda">
-                <button class="btn btn-primary" type="button" id="btnBuscar" (click)="btnBuscar_OnClick()">Buscar</button>
+                <input type="text" class="form-control" placeholder="Nombre o descripción del producto" aria-label="Producto" aria-describedby="button-addon2" name="texto" [(ngModel)]="txtBusqueda" (keyup.enter)="btnBuscar_OnClick()">
+                <button class="btn btn-primary" type="submit" id="btnBuscar" (click)="btnBuscar_OnClick()">Buscar</button>
             </div>
         </div>
         <div class="col-2">
@@ -18,7 +23,7 @@
         </div>
     </div>
     <div class="row">
-        <div *ngFor="let producto of itemsCatalogo" class="col-3">
+        <div *ngFor="let producto of itemsCatalogo" class="col-6 col-md-3">
             <app-main-producto [objProducto]=producto (eventAgregarCarrito)="btnAgregarCarrito_OnClick($event)" (eventEliminarCarrito)="btnEliminarCarrito_OnClick($event)" (eventModificarCarrito)="selCantidad_OnSelected($event)">
             </app-main-producto>
         </div>

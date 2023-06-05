@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { ClienteAutenticar, ClienteLogin } from 'src/app/models/Cliente';
 import { Producto, ProductoCatalogo, ProductoLocalStorage } from 'src/app/models/Producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 
@@ -12,9 +14,17 @@ export class MainComponent implements OnInit {
   txtBusqueda: String = ""
   itemsCarrito: ProductoCatalogo[] = [];
   cantidad: number = 0;
+  objCliente: ClienteLogin = {
+    nombres: "",
+    apellidos: "",
+    email: "",
+    id_cliente: 0,
+    sesion: false
+  }
 
   constructor(
-    private productoService: ProductoService
+    private productoService: ProductoService,
+    private cookies: CookieService
   ) { 
     if(localStorage.getItem('cart')==null){
       localStorage.setItem('cart', JSON.stringify(this.itemsCarrito));
@@ -25,6 +35,11 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.cookies.check('clienteAuth')){
+      this.objCliente = JSON.parse(this.cookies.get("clienteAuth"));
+    }
+
+    if(localStorage.getItem('clienteAuth')){}
     this.listarProductosPorFiltros();
   }
 

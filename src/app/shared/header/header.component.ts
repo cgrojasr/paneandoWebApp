@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private cookies: CookieService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  btnCerrar_OnClick(){
+    this.cookies.delete('clienteAuth','/');
+    localStorage.clear();
+    this.router.navigateByUrl("security");
+  }
 }

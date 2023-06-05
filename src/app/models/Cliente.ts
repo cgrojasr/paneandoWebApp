@@ -7,5 +7,6 @@ export interface ClienteLogin{
     id_cliente: Number,
     nombres: String,
     apellidos: String,
-    email: String
+    email: String,
+    sesion: Boolean
 }
